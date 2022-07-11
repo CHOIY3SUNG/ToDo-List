@@ -55,10 +55,10 @@
 		06FDCD802859E5E300FD9760 /* ToDo-List */ = {
 			isa = PBXGroup;
 			children = (
-				06FDCD8F2859E99100FD9760 /* todo-data_model.xcdatamodeld */,
 				06FDCD932859EE3800FD9760 /* Managers */,
 				06FDCD812859E5E300FD9760 /* ToDo_ListApp.swift */,
 				06FDCD832859E5E300FD9760 /* ContentView.swift */,
+				06FDCD8F2859E99100FD9760 /* todo-data_model.xcdatamodeld */,
 				06FDCD852859E5E300FD9760 /* Assets.xcassets */,
 				06FDCD872859E5E300FD9760 /* Preview Content */,
 			);

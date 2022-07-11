@@ -1,10 +1,3 @@
-//
-//  ToDo_ListApp.swift
-//  ToDo-List
-//
-//  Created by Y3SUNG on 2022/06/15.
-//
-
 import SwiftUI
 
 @main

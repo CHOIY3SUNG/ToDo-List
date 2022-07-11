@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  ToDo-List
-//
-//  Created by Y3SUNG on 2022/06/15.
-//
-
 import SwiftUI
 
 enum Priority: String, Identifiable, CaseIterable {
@@ -29,11 +22,49 @@ extension Priority {
 }
 struct ContentView: View {
     @State private var title: String = ""
+    @State private var selectedPriority: Priority = .medium
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "dateCreated",ascending: false)]) private var allTasks: FetchedResults<Task>
+    
+    private func saveTask() {
+        do {
+            let task = Task(context: viewContext)
+            task.title = title
+            task.priority = selectedPriority.rawValue
+            task.dataCreated = Date()
+            try viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
                 TextField("Enter title", text: $title)
                     .textFieldStyle(.roundedBorder)
+                Picker("Priority", selection: $selectedPriority) {
+                    ForEach(Priority.allCases) { priority in
+                        Text(priority.title).tag(priority)
+                    }
+                }.pickerStyle(.segmented)
+                Button("Save") {
+                    saveTask()
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+                
+                List {
+                    ForEach(allTasks) { task in
+                        Text(task.title ?? "")
+                    }
+                }
+                
+                Spacer()
             }
             .padding()
             .navigationTitle("All Tasks")
