@@ -10,7 +10,7 @@ class CoreDataManeger {
         persistenContainer = NSPersistentContainer(name: "todo-data_model")
         persistenContainer.loadPersistentStores { description, error in
             if let error = error {
-                fatalError("Unable to initialize COre Data \(error)")
+                fatalError("Unable to initialize Core Data \(error)")
             }
         }
     }
