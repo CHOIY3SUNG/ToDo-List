@@ -60,7 +60,10 @@ struct ContentView: View {
                 
                 List {
                     ForEach(allTasks) { task in
-                        Text(task.title ?? "")
+                        HStack {
+                            Circle()
+                            Text(task.title ?? "")
+                        }
                     }
                 }
                 
@@ -74,6 +77,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let persistedContainer = CoreDataManeger.shared.persistenContainer
+        ContentView().environment(\.managedObjectContext, persistedContainer.viewContext)
     }
 }
